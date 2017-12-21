@@ -1,7 +1,7 @@
-{% macro article.item(article,type="filename") %}
+{% macro article.item(file_dict) %}
 <div>
-    <p> title:{{ article.title }} </p>
-    <p> createtime: {{ article.createtime }} </p> 
-    <p> content:{{ article.content }} </p> 
+    <p> title:{{ file_dict.title }} </p>
+    <p> createtime: {{ file_dict.create_time }} </p> 
+    <p> content:{{ file_dict.content }} </p> 
 </div>
 {% endmacro %}
