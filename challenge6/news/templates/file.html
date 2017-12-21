@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% from "macro.html" import article_item %}
+{% block content %}
+<div>
+    {{ article_item(filename) }}
+</div>
+{% endblock %}
