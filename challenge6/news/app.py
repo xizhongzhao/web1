@@ -1,17 +1,17 @@
 #/usr/bin/env python3
 
 import json
-import os
+import os,os.path
 from flask import Flask,abort,render_template
 
-def filedict_from_json(filename):
-    with open(filename,'r') as file:
+def filedict_from_json(filename_arg):
+    with open(filename_arg,'r') as file:
         filedict = json.loads(file.read())
     return filedict
 
 filename_list = os.listdir('../files')
-file_dict_list = [ filedict_from_json('../files/'+filename) \
-                  for filename in filename_list ]
+file_dict_list = [ filedict_from_json('../files/'+filename_json) \
+                  for filename_json in filename_list ]
 title_list = [ file_dict.get('title')  for file_dict in file_dict_list ]
 
 
@@ -24,5 +24,8 @@ def index():
 
 @app.route('/files/<filename>')
 def file(filename):
-    _file_dict = filedict_from_json('../files/'+ filename + '.json')
-    return render_template('file.html',file_dict=_file_dict)
+    try:
+        file_dict = filedict_from_json('../files/'+filename+'.json')
+    except:
+        return render_template('404.html'),404
+    return render_template("file.html",file_dict=file_dict)
