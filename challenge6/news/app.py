@@ -29,3 +29,7 @@ def file(filename):
     except:
         return render_template('404.html'),404
     return render_template("file.html",file_dict=file_dict)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'),404
